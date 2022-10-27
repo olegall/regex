@@ -1,6 +1,5 @@
 using ConsoleApp1;
 using NUnit.Framework;
-using System.ComponentModel.DataAnnotations;
 
 namespace TestProject1
 {
@@ -13,30 +12,27 @@ namespace TestProject1
             _regex = new RegularExpression();
         }
 
-
         [SetUp]
         public void Setup()
         {
         }
 
         [Test]
-        public void TestCommitMsgRegex()
+        public void CheckCommitMsg_ValidData_Success()
         {
             // Arrange
             var validCommits = new[]
             {
-                "#1234-abcde",
-                "#1234-abcdefg",
-                "#0000-abcdefg",
+                "1234/abcde",
+                "1234/abcdefg",
+                "0000/abcd efg",
+                "2691/fix: atach",
+                "2691/fix: atach service init has been deleted",
+                "3435/milestone, code review corrections",
+                "3435/ milestone, code review corrections",
+                "3435/1aaaa 2aaaa 3aaaa 4aaaa 5aaaa 6aaaa 7aaaa 8aaaa"
             };
             
-            var invalidCommitsTaskNumber = new[]
-            {
-                "#123-abcde",
-                "#12345-abcde",
-                "#12-abcde"
-            };
-
             // Act
 
             // Assert
@@ -44,13 +40,37 @@ namespace TestProject1
             {
                 Assert.True(_regex.CheckCommitMsg(validCommit));
             }
+        }
+        
+        [Test]
+        public void CheckCommitMsg_InvalidData_Success()
+        {
+            // Arrange
+            var invalidNumber = new[]
+            {
+                "/abcde",
+                "12/abcde",
+                "123/abcde",
+                //"12345/abcde", // проходит, т.к. есть 4 цифры - удовлетвор€ет регул€рному выражению.
+            };
             
-            foreach (var invalidCommit in invalidCommitsTaskNumber) 
+            var invalidMessages = new[]
+            {
+                "1234/",
+                "12/a",
+                "3435/1aaaa 2aaaa 3aaaa 4aaaa 5aaaa 6aaaa 7aaaa 8aaaa 9aaaa 10aaaa"
+            };
+
+            // Act
+            foreach (var invalidCommit in invalidNumber)
             {
                 Assert.False(_regex.CheckCommitMsg(invalidCommit));
             }
-
-            Assert.Pass();
+            
+            foreach (var invalidMessage in invalidMessages)
+            {
+                Assert.False(_regex.CheckCommitMsg(invalidMessage));
+            }
         }
     }
 }
