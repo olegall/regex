@@ -6,10 +6,13 @@ namespace ConsoleApp1
     {
         public bool CheckCommitMsg(string input)
         {
-            var regex = new Regex(@"([0-9]{4})/([a-z,0-9, ,,,.,:]{5,50}$)");
+            var regex = new Regex(@"#([0-9]{4})/([a-z,0-9, ,,,.,:]{5,50}$)");
             return regex.IsMatch(input);
         }
 
+        /// <summary>
+        /// Test
+        /// </summary>
         public static bool UseRegex(string input)
         {
             //Regex regex = new Regex("#1", RegexOptions.IgnoreCase);

@@ -23,14 +23,14 @@ namespace TestProject1
             // Arrange
             var validCommits = new[]
             {
-                "1234/abcde",
-                "1234/abcdefg",
-                "0000/abcd efg",
-                "2691/fix: atach",
-                "2691/fix: atach service init has been deleted",
-                "3435/milestone, code review corrections",
-                "3435/ milestone, code review corrections",
-                "3435/1aaaa 2aaaa 3aaaa 4aaaa 5aaaa 6aaaa 7aaaa 8aaaa"
+                "#1234/abcde",
+                "#1234/abcdefg",
+                "#0000/abcd efg",
+                "#2691/fix: atach",
+                "#2691/fix: atach service init has been deleted",
+                "#3435/milestone, code review corrections",
+                "#3435/ milestone, code review corrections",
+                "#3435/1aaaa 2aaaa 3aaaa 4aaaa 5aaaa 6aaaa 7aaaa 8aaaa"
             };
             
             // Act
