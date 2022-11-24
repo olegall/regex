@@ -6,7 +6,7 @@ namespace ConsoleApp1
     {
         public bool CheckCommitMsg(string input)
         {
-            var regex = new Regex(@"#([0-9]{4}) ([A-Za-z,0-9, ,,,.,:]{5,300}$)");
+            var regex = new Regex(@"#([0-9]{4}) /([a-z,0-9, ,,,.,:,(,),-]{5,100}$)");
             return regex.IsMatch(input);
         }
 
