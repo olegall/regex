@@ -1,5 +1,6 @@
 using ConsoleApp1;
 using NUnit.Framework;
+using System;
 
 namespace TestProject1
 {
@@ -65,12 +66,84 @@ namespace TestProject1
             // Act
             foreach (var invalidCommit in invalidNumber)
             {
-                Assert.False(_regex.CheckCommitMsg(invalidCommit));
+                Assert.False(_regex.CheckFloat(invalidCommit));
             }
             
             foreach (var invalidMessage in invalidMessages)
             {
-                Assert.False(_regex.CheckCommitMsg(invalidMessage));
+                Assert.False(_regex.CheckFloat(invalidMessage));
+            }
+        }
+
+        [Test]
+        public void CheckFloat() 
+        {
+            var valid = new[]
+            {
+                "0",
+                "1",
+                "2",
+                "5",
+                "10",
+                //"",
+                //"",
+                //"",
+                //"",
+                //"",
+                //"",
+                //"",
+                //"",
+                //"",
+                //"",
+                //"",
+                //"",
+                //"",
+                //"",
+                //"",
+
+                "0.0",
+                "0.1",
+                "0.2",
+                "9.9",
+                "10.0",
+
+                "0,0",
+                "0,1",
+                "9,9",
+                "10,0",
+            };
+            var invalid = new[]
+            {
+                "-1",
+                "11",
+
+                "",
+                //null,
+                "dsfsdfggf",
+                "@#$%^&$",
+                "a",
+                "a1",
+                "5.05",
+                "05.5",
+                "110",
+                "111",
+                "20",
+                "50",
+                "100",
+
+                "00,0",
+                "-0.1",
+            };
+
+            foreach (var item in valid)
+            {
+                Assert.True(_regex.CheckFloat(item));
+                Console.WriteLine(item);
+            }
+
+            foreach (var item in invalid)
+            {
+                Assert.False(_regex.CheckFloat(item));
             }
         }
     }
